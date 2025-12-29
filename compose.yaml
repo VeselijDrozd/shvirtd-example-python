@@ -1,0 +1,45 @@
+version: '3.8'
+
+include:
+  - path: ./proxy.yaml
+
+services:
+  web:
+    image: cr.yandex/crphnci0fo4kg0llpbu3/app_python:latest
+    container_name: web_app
+    restart: always
+    networks:
+      backend:
+        ipv4_address: 172.20.0.5
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=mysql_db
+      - MYSQL_ROOT_HOST="%"
+      - DB_USER=${MYSQL_USER}
+      - DB_PASSWORD=${MYSQL_PASSWORD}
+      - DB_NAME=${MYSQL_DATABASE}
+    env_file:
+      - .env
+      
+  db:
+    image: mysql:8
+    container_name: mysql_db
+    restart: always
+    networks:
+      backend:
+        ipv4_address: 172.20.0.10
+    volumes:
+      - mysql_data:/var/lib/mysql
+    env_file:
+      - .env
+      
+networks:
+  backend:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+        
+volumes:
+  mysql_data:

@@ -1,0 +1,29 @@
+# Игнорируем системные файлы
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+env.bak/
+venv.bak/
+
+# Игнорируем Docker файлы
+Dockerfile
+Dockerfile.*
+
+# Игнорируем Git файлы
+.git/
+.gitignore
+
+# Игнорируем README и документацию
+README.md
+LICENSE
+
+# Игнорируем конфигурационные файлы для локального запуска
+nginx/
+haproxy/
+*.yaml
+*.yml
