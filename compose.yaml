@@ -5,7 +5,7 @@ include:
 
 services:
   web:
-    image: cr.yandex/crphnci0fo4kg0llpbu3/app_python:latest
+    image: cr.yandex/${REGISTRY_ID}/app_python:latest
     container_name: web_app
     restart: always
     networks:
